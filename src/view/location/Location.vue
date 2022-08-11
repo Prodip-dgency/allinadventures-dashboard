@@ -1,7 +1,8 @@
 <template>
    <div class="main-container">
        <h1>Select location to change</h1>
-       <button class="main-btn">Add Location</button>
+      
+       <router-link :to="{name:'Locationform'}" class="main-btn">Add Location</router-link>
 
        <div class="container">
           <table class="table-container">
@@ -16,7 +17,9 @@
              </thead>
 
              <tbody>
-                <tr v-for="location in locations" :key="location.id">
+               
+                 <tr v-for="location in locations" :key="location.id">
+                  <router-link :to="{name:'Locationdetail', params:{slug:location.id}}">
                  <td class="list">{{ location.title }}</td>
                  <td>{{location.desciption}}</td>
                  <td>{{location.address}}</td>
@@ -25,7 +28,9 @@
                   <td>
                      <button>Delete</button>
                   </td>
-              </tr>
+                  </router-link>
+                 </tr>
+                
               
              </tbody>
               

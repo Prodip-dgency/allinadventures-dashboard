@@ -7,11 +7,11 @@
              <ul>
                 <li class="list list1">
                    <span class="material-icons-outlined">assignment</span>
-                   <span>Activity</span>
+                   <router-link :to="{name:'Activity'}">Activity</router-link>
                 </li>
                 <li class="list list2">
                     <span class="material-icons-outlined">location_on</span>
-                    <span>Location</span>
+                    <router-link :to="{name:'Location'}">Location</router-link>
                 </li>
                 <li class="list list3">
                     <span class="material-icons-outlined">casino</span>
@@ -91,6 +91,11 @@ img{
     cursor: pointer;
     
   }
+
+  .list a{
+    text-decoration: none;
+    color: white;
+  }
  
   ul{
     margin-left: 2rem;
@@ -98,7 +103,7 @@ img{
     flex-direction: column;
     gap: 1rem;
   }
-  .list3{
+  .selected {
     width: 16rem;
     height: 2.5rem;
     background: rgb(179, 2, 2);
