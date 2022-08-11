@@ -8,7 +8,7 @@
         <nav-section />
      </div>
      <div class="body">
-         <body-section />
+         <router-view />
      </div>
 
    
@@ -19,14 +19,11 @@
 
 <script>
  import NavSection from './section/NavSection.vue'
- import BodySection from './section/Body.vue'
- import LocationForm from './form/LocationForm.vue'
+
  import SlideBar from './section/SlideBar.vue'
 export default {
     components: {
         NavSection,
-       BodySection,
-       LocationForm,
        SlideBar
     }
 
