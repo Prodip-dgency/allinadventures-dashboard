@@ -55,31 +55,26 @@ export default {
     return{
       locationId : this.$route.params.id,
       location: [],
-     
     }
   },
 
   methods:{
      myfunc(){
+       let options = {
+         method: 'PUT',
+         headers: {
+           'Content-Type':'application/json;charset=utf-8'
+         },
+         body: JSON.stringify(this.location)
+       }
+       let url = "http://192.241.157.30/activity/viewset/location/" + this.locationId + "/"
 
-      let newLocation = this.location;
-
-       console.log(newLocation);
-            let options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type':
-                    'application/json;charset=utf-8'
-            },
-            body: JSON.stringify( newLocation)
-        }
-            let fetchRes = fetch("http://192.241.157.30/activity/viewset/location/" + this.locationId + "/", options);
-            fetchRes.then(res =>res.json())
-            .then(data => this.location=data)
-        
+       fetch(url, options)
+       .then(res =>res.json())
+       .then(data => this.location=data)
      }
   },
-
+  
   mounted() {
      fetch("http://192.241.157.30/activity/viewset/location/" + this.locationId)
      .then((res)=>res.json())
