@@ -8,27 +8,27 @@
                  </div>
                  <div class="fild">
                    <label>Description</label>
-                   <textarea name="" id="" cols="110" rows="10" :value="location.desciption"></textarea>
+                   <textarea name="" id="" cols="110" rows="10" v-model="location.desciption"></textarea>
                  </div>
                  <div class="fild">
                    <label>Address</label>
-                   <input type="text"  :value="location.address">
+                   <input type="text"  v-model="location.address">
                  </div>
 
                  <div class="city-state">
                     <div class="fild">
                       <label>City</label>
-                      <input type="text" class="city-input" :value="location.city">
+                      <input type="text" class="city-input" v-model="location.city">
                     </div>
                    <div class="fild">
                       <label>State</label>
-                      <input type="text" class="city-input"  :value="location.state">
+                      <input type="text" class="city-input"  v-model="location.state">
                     </div>
                  </div>
 
                  <div class="fild">
                     <label >GPS Data</label>
-                    <input type="text" :value="location.gps_data">
+                    <input type="text" v-model="location.gps_data">
                  </div>
 <!-- 
                  <div class="fild">
@@ -58,20 +58,20 @@ export default {
   },
 
   methods:{
-     myfunc(location){
+     myfunc(){
 
-      let newLocation = location
+      let newLocation = this.location;
 
-       console.log(this.location);
+       console.log(newLocation);
             let options = {
             method: 'PUT',
             headers: {
                 'Content-Type':
                     'application/json;charset=utf-8'
             },
-            body: JSON.stringify({title: newLocation})
+            body: JSON.stringify( newLocation)
         }
-            let fetchRes = fetch("http://192.241.157.30/activity/viewset/location/" + this.locationId, options);
+            let fetchRes = fetch("http://192.241.157.30/activity/viewset/location/" + this.locationId + "/", options);
             fetchRes.then(res =>res.json())
             .then(data => this.location=data)
         
