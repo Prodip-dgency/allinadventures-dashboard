@@ -13,7 +13,7 @@
                     <span class="material-icons-outlined">location_on</span>
                     <router-link :to="{name:'Location'}">Location</router-link>
                 </li>
-                <li class="list list3">
+                <li class="list list3 selected">
                     <span class="material-icons-outlined">casino</span>
                     <span>Virtual Games</span>
                 </li>

@@ -3,6 +3,7 @@ import Activity from '../view/activity/Activity.vue'
 import Location from '../view/location/Location.vue'
 import LocationForm from '../view/location/LocationForm.vue'
 import LocationDetail from '../view/location/LocationDetail.vue'
+import LocationUpdate from '../view/location/LocationUpdate.vue'
 
 
 const routes =[
@@ -22,10 +23,15 @@ const routes =[
         component: Location
     },
     {
-        path:'/location/:slug',
+        path:'/location/:id',
         name:'Locationdetail',
         component: LocationDetail
     },
+    {
+        path: '/location/update/:id',
+        name: 'Locationupdate',
+        component: LocationUpdate
+    }
 ]
 
 
