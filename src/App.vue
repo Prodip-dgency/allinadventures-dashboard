@@ -43,6 +43,6 @@ export default {
     margin-left: 21rem;
  }
  .body{
-  margin-left: 20rem;
+  margin-left: 21rem;
  }
 </style>

@@ -1,12 +1,14 @@
 <template>
    <div class="main-container">
-       <h1>Select location to change</h1>
+      <div class="text-container">
+         <h1>Select location to change</h1>
       
-       <router-link :to="{name:'Locationform'}" class="main-btn">Add Location</router-link>
+          <router-link :to="{name:'Locationform'}" class="main-btn">Add Location</router-link>
+      </div>
 
        <div class="container">
           <table class="table-container">
-             <thead >
+             <thead>
                  <tr>
                    <th @click="myfunc">Title</th>
                    <th>Description</th>
@@ -15,27 +17,29 @@
                    <th>State</th>
                 </tr>
              </thead>
-
              <tbody>
-               
-                 <tr v-for="location in locations" :key="location.id">
-                  <router-link :to="{name:'Locationdetail', params:{slug:location.id}}">
-                 <td class="list">{{ location.title }}</td>
-                 <td>{{location.desciption}}</td>
-                 <td>{{location.address}}</td>
-                 <td>{{location.city}}</td>
-                 <td >{{location.state}}</td>
-                  <td>
-                     <button>Delete</button>
-                  </td>
-                  </router-link>
-                 </tr>
-                
-              
+                  <tr v-for="location in locations" :key="location.id">
+                     <router-link  :to="{name:'Locationdetail' , params:{id:location.id}}" >
+                      <td class="list">{{ location.title }}</td>
+                     </router-link>
+                     <td>{{location.desciption}}</td>
+                     <td>{{location.address}}</td>
+                     <td>{{location.city}}</td>
+                     <td >{{location.state}}</td>
+                     <td>
+                        <button>Delete</button>
+                     </td>
+                  </tr>
              </tbody>
-              
-             
           </table>
+            <!-- <div class="detail-btn">
+
+              <div  v-for="location in locations" :key="location.id">
+               <router-link  :to="{name:'Locationdetail' , params:{id:location.id}}" >
+                 <button>Detail Here</button>
+              </router-link>
+             </div>
+            </div> -->
        </div>
 
 
@@ -93,6 +97,13 @@ export default {
      width: 100%;
   }
 
+  .text-container{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   
+  }
+
   h1{
     margin: 4rem 5rem;
     font-size: 2rem;
@@ -100,9 +111,26 @@ export default {
     
   }
 
+   .main-btn{
+    height: 2rem;
+    text-decoration: none;
+    background-color:rgb(179, 2, 2);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.6rem 2.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin-right: 2.5rem;
+    
+  }
+
   .container{
-    width: 90%;
+    width: 100%;
     margin:1rem 5rem ;
+    
+   
   }
 
   .table-container{
@@ -114,20 +142,26 @@ export default {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1.1rem;
     text-align: left;
-    /* display: flex;
-    list-style: none;
-    font-weight: 600;
-    justify-content: space-between; */
+  }
+
+  tbody a{
+    text-decoration: none;
+    color: black;
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+     font-size: 1rem;
+     transition: all 0.8s;
+  }
+
+  tbody a:hover{
+  color: red;
+  font-size: 1.1rem;
   }
 
   tbody{
     height: 4rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* display: flex;
-    list-style: none;
-    font-weight: 400;
-    justify-content: space-between; */
   }
+
 
   tbody button{
    background: white;
@@ -152,25 +186,17 @@ export default {
       transition: all 1s;
    }
  
-  .list1{
-     width: 10rem;
-  }
-  .main-btn{
-    position: fixed;
-    top: 8rem;
-    right: 5rem;
-    display: inline-block;
-    background-color:rgb(179, 2, 2);
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    padding: 0.6rem 2.2rem;
-    cursor: pointer;
-    margin: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    
-  }
+ 
+
+.detail-btn{
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+   justify-content: center;
+   margin-top: 4rem;
+   gap: 1rem;
+
+}
 
 
 </style>
