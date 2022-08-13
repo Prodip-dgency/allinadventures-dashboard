@@ -4,8 +4,8 @@
             <img src="..\assets\logo.png" alt="">
         </div>
         <div class="menu">
-             <ul>
-                <li class="list list1">
+             <ul id="sidebar-menu">
+                <li class="list list1 selected">
                    <span class="material-icons-outlined">assignment</span>
                    <router-link :to="{name:'Activity'}">Activity</router-link>
                 </li>
@@ -13,7 +13,7 @@
                     <span class="material-icons-outlined">location_on</span>
                     <router-link :to="{name:'Location'}">Location</router-link>
                 </li>
-                <li class="list list3 selected">
+                <li class="list list3">
                     <span class="material-icons-outlined">casino</span>
                     <span>Virtual Games</span>
                 </li>
@@ -39,23 +39,30 @@
                 </li>
              </ul>
         </div>
-
-     
-        
-
-
-
-
-
     </div>
-
 </template>
 
 <script>
-export default {
 
+export default {
+    
+    mounted(){
+        let sidebarmenu = document.getElementById('sidebar-menu')
+        let sidebarmenu_items = sidebarmenu.getElementsByClassName('list')
+
+        for (let i = 0; i < sidebarmenu_items.length; i++){
+            sidebarmenu_items[i].addEventListener('click', function(){
+                let current = document.getElementsByClassName('selected');
+                current[0].className = current[0].className.replace(" selected", "");
+                this.className += " selected";
+            })
+            console.log(sidebarmenu_items[i].classList)
+        }
+    }
 }
+
 </script>
+
 
 <style scoped>
 
