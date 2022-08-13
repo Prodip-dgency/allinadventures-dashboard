@@ -2,8 +2,9 @@
    <div class="main-container">
       <div class="text-container">
          <h1>Select location to change</h1>
-      
-          <router-link :to="{name:'Locationform'}" class="main-btn">Add Location</router-link>
+            <div class="btn-container">
+                <router-link :to="{name:'Locationform'}" class="main-btn">Add Location</router-link>
+            </div>
       </div>
 
        <div class="container">
@@ -18,17 +19,20 @@
                 </tr>
              </thead>
              <tbody>
-                  <tr v-for="location in locations" :key="location.id">
-                     <router-link  :to="{name:'Locationdetail' , params:{id:location.id}}" >
-                      <td class="list">{{ location.title }}</td>
-                     </router-link>
+                  <tr v-for="location in locations" :key="location.id" >
+                     <td class="list">
+                        <router-link  :to="{name:'Locationdetail' , params:{id:location.id}}" >
+                           {{ location.title }}
+                        </router-link>
+                     </td>
                      <td>{{location.desciption}}</td>
                      <td>{{location.address}}</td>
                      <td>{{location.city}}</td>
                      <td >{{location.state}}</td>
-                     <td>
-                        <button>Delete</button>
-                     </td>
+
+                     <div class="btn">
+                       <button>Delete</button>
+                     </div>
                   </tr>
              </tbody>
           </table>
@@ -111,23 +115,28 @@ export default {
     
   }
 
+  .btn-container{
+
+  }
+
    .main-btn{
-    height: 2rem;
+    height: 3rem;
     text-decoration: none;
     background-color:rgb(179, 2, 2);
     color: #fff;
     font-size: 1rem;
     font-weight: 400;
-    padding: 0.6rem 2.2rem;
+    padding: 1rem 1.6rem;
     cursor: pointer;
     border: none;
     border-radius: 10px;
     margin-right: 2.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     
   }
 
   .container{
-    width: 100%;
+    width: 85%;
     margin:1rem 5rem ;
     
    
@@ -142,14 +151,24 @@ export default {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1.1rem;
     text-align: left;
+    background: rgb(231, 227, 227);
+   
+  }
+  thead tr th{
+   padding: 0.4rem 0.8rem;
   }
 
   tbody a{
+    height: 3rem;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: black;
+    color: rgb(59, 170, 59);
      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
      font-size: 1rem;
      transition: all 0.8s;
+     font-weight: 500;
+
   }
 
   tbody a:hover{
@@ -161,6 +180,15 @@ export default {
     height: 4rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  
+  tbody tr td{
+      padding: 0.4rem 0.8rem;
+  }
+
+  td {
+  border-bottom: 1px solid rgb(214, 207, 207);
+  }
+
 
 
   tbody button{
@@ -174,8 +202,9 @@ export default {
    /* border: none; */
    padding: 0.3rem 0.2rem;
    border-radius: 10px;
-   margin-left: 10rem;
+   margin-left: 5rem;
    cursor: pointer;
+   border: 0.5px dotted #999;
   
   }
   
@@ -196,6 +225,11 @@ export default {
    margin-top: 4rem;
    gap: 1rem;
 
+}
+.btn{
+   height: 4rem;
+   display: flex;
+   align-items: center;
 }
 
 
