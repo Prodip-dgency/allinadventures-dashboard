@@ -30,6 +30,8 @@
                     <label >GPS Data</label>
                     <input type="text" v-model="location.gps_data">
                  </div>
+
+                 <!-- fnjy6tjnudy -->
 <!-- 
                  <div class="fild">
                     <label >Card Image</label>
