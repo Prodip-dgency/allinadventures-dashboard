@@ -31,10 +31,14 @@
                      <td >{{location.state}}</td>
 
                      <div class="btn">
-                       <button>Delete</button>
+                       <button @click="popupOpen('display')" type="submit">Delete</button>
                      </div>
+
+
+                     
                   </tr>
              </tbody>
+                
           </table>
             <!-- <div class="detail-btn">
 
@@ -45,6 +49,17 @@
              </div>
             </div> -->
        </div>
+
+               <div class="pop-up" :class="activeclass"   v-for="location in locations" :key="location.id">
+                   <div class="popup-content">
+                      <div class="close" @click="popupclose">+</div>
+                       <div class="img">
+                         <span class="material-symbols-outlined">warning</span>
+                       </div>
+                       <h2>Are you sure you want to delete this location ?</h2>
+                       <button class="popup-btn" @click="deletefunc(location.id)">delete</button>
+                   </div>
+                </div>
 
 
        <!-- <div class="container">
@@ -75,25 +90,52 @@
 </template>
 
 <script>
-export default {
-    data(){
+   export default {
+      data(){
         
         return{
+            activeclass: '',
             locations: []
         }
-    },
+      },
     
-    mounted(){
+    
+      methods:{
+       popupOpen(classname){
+             this.activeclass = classname
+              
+          },
+          
+       popupclose(){
+         this.activeclass= ""
+       },
+
+       deletefunc(x){
+            let options = {
+             method: 'DELETE',
+             headers: {
+                'Content-Type':
+                    'application/json;charset=utf-8'
+               },
+
+            };
+            fetch("http://192.241.157.30/activity/viewset/location/" + x +"/" , options)
+            .then((res)=>res.json())
+            .then(data=> console.log(data))
+
+            this.activeclass= ""
+            
+         }
+
+      },
+
+      mounted(){
         fetch("http://192.241.157.30/activity/viewset/location/")
         .then((res) => res.json())
         .then((data)=> this.locations = data)
-    },
-    methods:{
-       myfunc(){
-        console.log(this.location)
-       }
-    }
-}
+      },
+   
+   }
 </script>
 
 <style scoped>
@@ -163,7 +205,7 @@ export default {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: rgb(59, 170, 59);
+    color: rgb(33, 226, 33);
      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
      font-size: 1rem;
      transition: all 0.8s;
@@ -230,6 +272,72 @@ export default {
    height: 4rem;
    display: flex;
    align-items: center;
+}
+
+
+.pop-up{
+   width: 100%;
+   height: 100%;
+   background-color: rgb(0,0 , 0,0.4);
+   position: absolute;
+   top: 0;
+   display: none;
+   justify-content: center;
+   align-items: center;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.popup-content{
+   width: 35rem;
+   height: 19rem;
+   background: white;
+   padding: 2rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 3rem;
+   position: relative;
+ 
+}
+.close{
+   font-size: 2rem;
+   position: absolute;
+   top: 0.6rem;
+   right: 1.5rem;
+   transform: rotate(45deg);
+   cursor: pointer;
+}
+
+.material-symbols-outlined{
+   font-size: 5rem;
+   color: rgb(235, 63, 11);
+}
+.popup-content h2{
+   font-size: 1.45rem;
+   
+}
+
+.popup-btn{
+    height: 2.5rem;
+    width: 10rem;
+    display: inline-block;
+    background-color:rgb(179, 2, 2);
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.display{
+   display: flex;
 }
 
 
