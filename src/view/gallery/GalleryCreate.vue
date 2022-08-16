@@ -45,19 +45,19 @@ export default {
     },
 
     postData() {
+      const formData = new FormData()
+      formData.append('image', this.galleryData.image);
+      formData.append('title', this.galleryData.title);
+      formData.append('description', this.galleryData.description);
       let options = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json;charset=utf-8",
+          "Accept": "application/json;charset=utf-8",
         },
-        body: JSON.stringify(this.galleryData),
+        body: formData,
       };
-
       fetch("http://192.241.157.30/activity/viewset/gallery/", options)
         .then((res) => res.json())
-        .then((d) => console.log(d));
-
-      console.log(this.galleryData);
     },
   },
 };
