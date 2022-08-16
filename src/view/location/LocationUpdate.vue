@@ -40,7 +40,7 @@
                  </div> -->
 
                  <div class="btn-main">
-                    <button @click.prevent="myfunc" class="btn">Update</button>
+                    <router-link :to="{name:'Location'}" @click.prevent="myfunc" class="btn" >Update</router-link>
                  </div>
 
             </form>
@@ -55,26 +55,31 @@ export default {
     return{
       locationId : this.$route.params.id,
       location: [],
+     
     }
   },
 
   methods:{
      myfunc(){
-       let options = {
-         method: 'PUT',
-         headers: {
-           'Content-Type':'application/json;charset=utf-8'
-         },
-         body: JSON.stringify(this.location)
-       }
-       let url = "http://192.241.157.30/activity/viewset/location/" + this.locationId + "/"
 
-       fetch(url, options)
-       .then(res =>res.json())
-       .then(data => this.location=data)
-     }
+      let newLocation = this.location;
+
+            console.log(newLocation);
+        let options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type':
+                    'application/json;charset=utf-8'
+            },
+            body: JSON.stringify( newLocation)
+        }
+            let fetchRes = fetch("http://192.241.157.30/activity/viewset/location/" + this.locationId + "/", options);
+            fetchRes.then(res =>res.json())
+            .then(data => this.location=data)
+        
+    }
   },
-  
+
   mounted() {
      fetch("http://192.241.157.30/activity/viewset/location/" + this.locationId)
      .then((res)=>res.json())
@@ -160,12 +165,17 @@ input{
     display: inline-block;
     background-color:rgb(179, 2, 2);
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 400;
-    padding: 0.6rem 1rem;
+    padding: 0.4rem 0.8rem;
     cursor: pointer;
     border: none;
     border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 </style>
