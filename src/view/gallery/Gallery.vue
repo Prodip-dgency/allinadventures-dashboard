@@ -33,7 +33,9 @@ export default {
   mounted() {
     fetch("http://192.241.157.30/activity/viewset/gallery/")
       .then((res) => res.json())
-      .then((data) => (this.gallery = data));
+      .then((data) => (this.gallery = data))
+      .then(()=>console.log(this.gallery[1]));
+      
   },
 };
 </script>
