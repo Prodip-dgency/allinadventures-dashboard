@@ -34,6 +34,16 @@
         </div>
       </div>
 
+      <div class="fild">
+        <label>State</label>
+        <div class="select-container">
+          <input type="text" class="select" />
+          <div class="option">
+            <div><img src="../../assets/prodip.jpg" alt="" class="select-img"> Nature</div>
+          </div>
+        </div>
+      </div>
+
       <div class="update-btn">
         <router-link
           :to="{ name: 'Location' }"
@@ -97,7 +107,7 @@ form {
   /* Center the form on the page */
   margin: 5rem auto;
   width: 60rem;
-  height: 38rem;
+  height: 40rem;
   /* Form outline */
   padding: 1.5rem;
   border: 1px solid #ccc;
@@ -161,8 +171,34 @@ textarea {
   border-radius: 4px;
 }
 
+.select {
+  width: 16rem;
+  height: 3rem;
+  border: 0.5px solid;
+}
+
 .city-state {
   display: flex;
   justify-content: space-between;
+}
+
+.select-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.6rem;
+  position: relative;
+}
+.select-container input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.select-img{
+  width: 2.5rem;
+  
 }
 </style>
