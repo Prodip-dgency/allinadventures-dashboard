@@ -37,9 +37,18 @@
       <div class="fild">
         <label>State</label>
         <div class="select-container">
-          <input type="text" class="select" />
-          <div class="option">
-            <div><img src="../../assets/prodip.jpg" alt="" class="select-img"> Nature</div>
+          <div @click="opendropdown">
+            <input type="text" class="select" />
+          </div>
+          <div
+            class="option"
+            :class="activeclass"
+            @click="show('nature','hide')"
+          >
+            <div v-for="item in gallery" :key="item.title">
+              <img :src="item.image" alt="" class="select-img" />
+              {{item.title}}
+            </div>
           </div>
         </div>
       </div>
@@ -68,7 +77,17 @@ export default {
         city: "",
         state: "",
       },
+      activeclass: "hide",
+      gallery: [],
     };
+  },
+
+  mounted() {
+    fetch("http://192.241.157.30/activity/viewset/gallery/")
+      .then((res) => res.json())
+      .then((data) => (this.gallery = data))
+     
+      
   },
 
   methods: {
@@ -89,6 +108,20 @@ export default {
         .then((d) => {
           console.log(d);
         });
+        // console.log(this.gallery);
+    },
+
+    show(x, classname) {
+       document.querySelector(".select").value = x;
+      this.activeclass = classname;
+    },
+    opendropdown() {
+       if (this.activeclass) {
+          this.activeclass = "";
+       }else{
+        this.activeclass= "hide"
+       }
+        
     },
   },
 };
@@ -159,6 +192,7 @@ input {
   font-size: 1.2rem;
   font-weight: 400;
 }
+
 label {
   font-size: 1.4rem;
   font-weight: 500;
@@ -182,23 +216,67 @@ textarea {
   justify-content: space-between;
 }
 
-.select-container{
+.select-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1rem;
   position: relative;
+  width: 16rem;
+  padding: 1rem 0;
+  margin-bottom: 3rem;
 }
-.select-container input{
+.select-container input {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   cursor: pointer;
+  border: none;
+  outline: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
-.select-img{
+.select-container::before {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: 15px;
+  z-index: 10000;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #333;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(-45deg);
+  cursor: pointer;
+}
+.select-container.hide::before {
+  transform: rotate(-225deg);
+}
+.select-container .option {
+  position: absolute;
+  top: 70px;
+  height: 15rem;
+  background: #fff;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow-y: scroll;
+}
+
+.select-container .option div {
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+}
+.select-container .option div:hover {
+  background: #62baea;
+  color: #fff;
+}
+.hide {
+  display: none;
+}
+.select-img {
   width: 2.5rem;
-  
 }
 </style>
